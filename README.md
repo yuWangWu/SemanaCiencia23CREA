@@ -7,8 +7,11 @@ Hecho con mucho love <3 por estudiantes pertenecientes al CREA (Club de Robótic
 
 **Autores:** 
 + Yu Wang Wu - Código
+
 **Proyecto:** Taller Semana de la Ciencia 2023
+
 **Placa objetivo:** Arduino Nano
+
 **Controlador:** ATMega328p
 
 **Descripcion del proyecto:** 
