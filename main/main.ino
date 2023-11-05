@@ -46,15 +46,11 @@
 #define PIN_LED_HUMEDAD_ALTA      7
 
 // Funciones propias
+// No necesario porque es Arduino "C++"
 // NO EDITABLE
 void obtenerDatosSensores();
 void dibujarEstado(int parametro, bool estado[]);
 void dibujarPantalla(int dibujo[]);
-
-// Definiciones de comunicaciones con componentes
-// NO EDITABLE
-Adafruit_BMP085 termometro;
-LedControl pantalla = LedControl(PIN_MATRIZLED_DIN, PIN_MATRIZLED_CLK, PIN_MATRIZLED_CS, 0);
 
 // Variables globales
 // NO EDITABLE
@@ -70,7 +66,6 @@ int VALOR_PROBLEMA_TEMPERATURA = 0;
 int VALOR_PROBLEMAS = 0;
 int VALOR_HUMEDADTIERRA;
 int VALOR_LDR;
-int VALOR_BAROMETRO;
 int VALOR_TEMPERATURA;
 
 // Variables globales
@@ -79,9 +74,9 @@ const int VALOR_HUMEDAD_BAJA = 100        ;
 const int VALOR_HUMEDAD_ALTA = 200        ;
 const int VALOR_LUZ_BAJA = 5              ;
 const int VALOR_LUZ_ALTA = 10             ;
-const int VALOR_TEMPERATURA_BAJA = 15     ;
+const int VALOR_TEMPERATURA_BAJA = 15     ; // en *C
 const int VALOR_TEMPERATURA_ALTA = 25     ;
-const int VALOR_RETARDO_LECTURA = 2000    ;
+const int VALOR_RETARDO_LECTURA = 2000    ; // en milisengundos
 
 // Dibujos para la pantalla
 // Orden de los dibujos:
@@ -146,6 +141,11 @@ const int DIBUJO_CARA_MEH = dibujos[1];
 const int DIBUJO_CARA_TRISTE = dibujos[2];
 const int DIBUJO_ERROR = dibujos[3];
 const int DIBUJO_CREA = dibujos[4];
+
+// Definiciones de comunicaciones con componentes
+// NO EDITABLE
+Adafruit_BMP085 termometro;
+LedControl pantalla = LedControl(PIN_MATRIZLED_DIN, PIN_MATRIZLED_CLK, PIN_MATRIZLED_CS, 0);
 
 /**********************************************************************************/
 // Comienzo del programa
@@ -265,8 +265,6 @@ void loop() {
   Serial.println(VALOR_HUMEDADTIERRA);
   Serial.print("Valor LDR: ");
   Serial.println(VALOR_LDR);
-  Serial.print("Valor barometro: ");
-  Serial.println(VALOR_BAROMETRO);
   Serial.print("Valor temperatura: ");
   Serial.println(VALOR_TEMPERATURA);
   Serial.println("******************************");
@@ -289,7 +287,6 @@ void loop() {
 void obtenerDatosSensores() {
   VALOR_HUMEDADTIERRA = analogRead(PIN_HUMEDADTIERRA);
   VALOR_LDR = analogRead(PIN_LDR);
-  VALOR_BAROMETRO = termometro.readPressure();
   VALOR_TEMPERATURA = termometro.readTemperature();
 }
 
