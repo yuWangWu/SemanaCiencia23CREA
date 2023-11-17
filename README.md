@@ -3,6 +3,8 @@
 Hecho con mucho love <3 por estudiantes pertenecientes al CREA (Club de Robótica, Electrónica y Automática) de la Escuela Ténica Superior de Ingeniería y Diseño Industrial de la Universidad Politécnica de Madrid.
 
 **Autores:** 
++ Alejandro Cinque Rivas - Director, Diseño y Revisor del Código
++ Celia Saez de la Peña - Diseño
 + Yu Wang Wu - Código
 
 **Proyecto:** Taller Semana de la Ciencia 2023
@@ -15,6 +17,17 @@ Hecho con mucho love <3 por estudiantes pertenecientes al CREA (Club de Robótic
 Maceta inteligente controlado por un Arduino nano con un LDR, BMP180 y sensor capacitivo de humedad de tierra.
 Muestra en una serie LEDs en el intervalo que se encuentra de humedad de tierra, luz y temperatura ambiente además de dar un resumen de una pantalla de matriz de LEDs con símbolos.
 
+**Agradecimientos:** 
++ Carolina Tank
++ Gema Sánchez
++ Pablo Campoy
++ Paula Ramos
++ Jorge González 
++ Máximo Rivero
++ Gianmarco Barcelloni-Corte
++ Mateo Berizzo
++ Marcelo Luna
++ Y un largo etc pero la lista ya se está haciendo muy larga <3
 ## Material 
 
 Material necesario para realizar el proyecto:
