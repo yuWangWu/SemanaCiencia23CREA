@@ -1,19 +1,21 @@
-/* 
-* Copyright 2023 CREA ETSIDI-UPM
-*
-* Autor: Yu Wang Wu para CREA ETSIDI-UPM
-* Proyecto: Taller Semana de la Ciencia 2023
-* Placa objetivo: Arduino Nano
-* Controlador: ATMega328p
-*
-* Descripcion: 
-* Maceta inteligente controlado por un arduino 
-* nano con un LDR, BMP180 y sensor capacitivo 
-* de humedad de tierra. Muestra en una serie de 
-* LEDs los niveles de humedad de la tierra, 
-* temperatura ambiente y luz que recibe en el 
-* momento y tambien un dibujo en una pantalla 
-* de matriz de LEDs como resumen de la situacion.
+/*
+  Copyright 2023 CREA ETSIDI-UPM
+
+  Asociación:CREA ETSIDI-UPM
+  Director del proyecto y Revisor: Alejandro Cinque Rivas
+  Autor: Yu Wang Wu
+  Proyecto: Taller Semana de la Ciencia 2023
+  Placa objetivo: Arduino Nano
+  Controlador: ATMega328p
+
+  Descripcion:
+  Maceta inteligente controlado por un arduino
+  nano con un LDR, BMP180 y sensor capacitivo
+  de humedad de tierra. Muestra en una serie de
+  LEDs los niveles de humedad de la tierra,
+  temperatura ambiente y luz que recibe en el
+  momento y tambien un dibujo en una pantalla
+  de matriz de LEDs como resumen de la situacion.
 */
 
 // Librerias externas necesarias
@@ -33,9 +35,9 @@
 #define PIN_MATRIZLED_CS          10
 #define PIN_MATRIZLED_CLK         13
 
-#define PIN_LED_TEMPERATURA_BAJA  3 
+#define PIN_LED_TEMPERATURA_BAJA  3
 #define PIN_LED_TEMPERATURA_OK    2
-#define PIN_LED_TEMPERATURA_ALTA  1 
+#define PIN_LED_TEMPERATURA_ALTA  12
 
 #define PIN_LED_LUZ_BAJA          6
 #define PIN_LED_LUZ_OK            5
@@ -70,10 +72,10 @@ int VALOR_TEMPERATURA;
 
 // Variables globales
 // EDITABLE
-const int VALOR_HUMEDAD_BAJA = 100        ;
-const int VALOR_HUMEDAD_ALTA = 200        ;
-const int VALOR_LUZ_BAJA = 5              ;
-const int VALOR_LUZ_ALTA = 10             ;
+const int VALOR_HUMEDAD_BAJA = 700        ;
+const int VALOR_HUMEDAD_ALTA = 500        ;
+const int VALOR_LUZ_BAJA = 800               ;
+const int VALOR_LUZ_ALTA = 1100             ;
 const int VALOR_TEMPERATURA_BAJA = 15     ; // en *C
 const int VALOR_TEMPERATURA_ALTA = 25     ;
 const int VALOR_RETARDO_LECTURA = 2000    ; // en milisengundos
@@ -163,13 +165,13 @@ void setup() {
 
   // Comprobacion de conexion BMP180
   if (!termometro.begin()) {
-	  Serial.println("No se ha podido encontrar el BMP180, revisa las conexiones!");
+    Serial.println("No se ha podido encontrar el BMP180, revisa las conexiones!");
     dibujarPantalla(DIBUJO_ERROR);
-	  while (1) {}
+    while (1) {}
   }
 
   // Comprobacion de si los datos para los parametros tienen sentido
-  if (VALOR_HUMEDAD_BAJA >= VALOR_HUMEDAD_ALTA) {
+  if (VALOR_HUMEDAD_ALTA >= VALOR_HUMEDAD_BAJA) {
     Serial.println("Revise los valores introducidos para la humedad!");
     dibujarPantalla(DIBUJO_ERROR);
     while (1) {}
@@ -185,7 +187,6 @@ void setup() {
     while (1) {}
   }
 
-
   Serial.println("***********************************************");
   Serial.println("*************Comienzo del programa*************");
   Serial.println("***********************************************");
@@ -198,10 +199,10 @@ void loop() {
   obtenerDatosSensores();
 
   // Comprobacion de estado humedad
-  if (VALOR_HUMEDADTIERRA < VALOR_HUMEDAD_BAJA) {
+  if (VALOR_HUMEDADTIERRA > VALOR_HUMEDAD_BAJA) {
     dibujarEstado(humedad, ESTADO_POCO);
     VALOR_PROBLEMA_HUMEDAD = 1;
-  } else if (VALOR_HUMEDADTIERRA > VALOR_HUMEDAD_ALTA) {
+  } else if (VALOR_HUMEDADTIERRA < VALOR_HUMEDAD_ALTA) {
     dibujarEstado(humedad, ESTADO_MUCHO);
     VALOR_PROBLEMA_HUMEDAD = 1;
   } else {
@@ -241,7 +242,7 @@ void loop() {
     case 0:
       dibujarPantalla(DIBUJO_CARA_FELIZ);
       break;
-    
+
     case 1:
       dibujarPantalla(DIBUJO_CARA_MEH);
       break;
