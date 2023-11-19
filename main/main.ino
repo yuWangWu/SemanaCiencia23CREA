@@ -32,20 +32,20 @@
 #define PIN_BAROMETRO_SDA         A4    // No es necesaria esta definicion
 
 #define PIN_MATRIZLED_DIN         11
-#define PIN_MATRIZLED_CS          10
+#define PIN_MATRIZLED_CS          12
 #define PIN_MATRIZLED_CLK         13
 
-#define PIN_LED_TEMPERATURA_BAJA  3
-#define PIN_LED_TEMPERATURA_OK    2
-#define PIN_LED_TEMPERATURA_ALTA  12
+#define PIN_LED_TEMPERATURA_BAJA  2
+#define PIN_LED_TEMPERATURA_OK    3
+#define PIN_LED_TEMPERATURA_ALTA  4
 
-#define PIN_LED_LUZ_BAJA          6
-#define PIN_LED_LUZ_OK            5
-#define PIN_LED_LUZ_ALTA          4
+#define PIN_LED_LUZ_BAJA          5
+#define PIN_LED_LUZ_OK            6
+#define PIN_LED_LUZ_ALTA          7
 
-#define PIN_LED_HUMEDAD_BAJA      9
-#define PIN_LED_HUMEDAD_OK        8
-#define PIN_LED_HUMEDAD_ALTA      7
+#define PIN_LED_HUMEDAD_BAJA      8
+#define PIN_LED_HUMEDAD_OK        9
+#define PIN_LED_HUMEDAD_ALTA      10
 
 // Funciones propias
 // No necesario porque es Arduino "C++"
