@@ -31,9 +31,9 @@
 #define PIN_BAROMETRO_SCL         A5    // No es necesaria esta definicion
 #define PIN_BAROMETRO_SDA         A4    // No es necesaria esta definicion
 
-#define PIN_MATRIZLED_DIN         11
+#define PIN_MATRIZLED_DIN         13
 #define PIN_MATRIZLED_CS          12
-#define PIN_MATRIZLED_CLK         13
+#define PIN_MATRIZLED_CLK         11
 
 #define PIN_LED_TEMPERATURA_BAJA  2
 #define PIN_LED_TEMPERATURA_OK    3
@@ -48,7 +48,6 @@
 #define PIN_LED_HUMEDAD_ALTA      10
 
 // Funciones propias
-// No necesario porque es Arduino "C++"
 // NO EDITABLE
 void obtenerDatosSensores();
 void dibujarEstado(int parametro, bool estado[]);
@@ -74,8 +73,8 @@ int VALOR_TEMPERATURA;
 // EDITABLE
 const int VALOR_HUMEDAD_BAJA = 700        ;
 const int VALOR_HUMEDAD_ALTA = 500        ;
-const int VALOR_LUZ_BAJA = 800               ;
-const int VALOR_LUZ_ALTA = 1100             ;
+const int VALOR_LUZ_BAJA = 800            ;
+const int VALOR_LUZ_ALTA = 1100           ;
 const int VALOR_TEMPERATURA_BAJA = 15     ; // en *C
 const int VALOR_TEMPERATURA_ALTA = 25     ;
 const int VALOR_RETARDO_LECTURA = 2000    ; // en milisengundos
@@ -162,30 +161,33 @@ void setup() {
 
   // Placeholder hehe
   dibujarPantalla(DIBUJO_CREA);
+  delay(5000);
 
   // Comprobacion de conexion BMP180
   if (!termometro.begin()) {
     Serial.println("No se ha podido encontrar el BMP180, revisa las conexiones!");
     dibujarPantalla(DIBUJO_ERROR);
-    while (1) {}
+    //while (1) {}
   }
 
   // Comprobacion de si los datos para los parametros tienen sentido
   if (VALOR_HUMEDAD_ALTA >= VALOR_HUMEDAD_BAJA) {
     Serial.println("Revise los valores introducidos para la humedad!");
     dibujarPantalla(DIBUJO_ERROR);
-    while (1) {}
+    //while (1) {}
   }
   if (VALOR_LUZ_BAJA >= VALOR_LUZ_ALTA) {
     Serial.println("Revise los valores introducidos para la luz!");
     dibujarPantalla(DIBUJO_ERROR);
-    while (1) {}
+    //while (1) {}
   }
   if (VALOR_TEMPERATURA_BAJA >= VALOR_TEMPERATURA_ALTA) {
     Serial.println("Revise los valores introducidos para la temperatura!");
     dibujarPantalla(DIBUJO_ERROR);
-    while (1) {}
+    //while (1) {}
   }
+
+  delay(5000)
 
   Serial.println("***********************************************");
   Serial.println("*************Comienzo del programa*************");
